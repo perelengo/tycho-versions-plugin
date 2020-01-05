@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Copyright (c) 2008, 2011 Sonatype Inc. and others. - All rights reserved. 
+	This program and the accompanying materials - are made available under the 
+	terms of the Eclipse Public License v1.0 - which accompanies this distribution, 
+	and is available at - http://www.eclipse.org/legal/epl-v10.html - - Contributors: 
+	- Sonatype Inc. - initial API and implementation - 
+	- Pere Joseph Rodriguez - Modification to synchronize MANIFEST version from pom.xml
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.tycho</groupId>
+		<artifactId>tycho-release</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../tycho/tycho-release</relativePath>
+	</parent>
+	<groupId>net.samsarasoftware</groupId>
+	<artifactId>tycho-versions-plugin</artifactId>
+	<version>0.2.0-SNAPSHOT</version>
+	<packaging>maven-plugin</packaging>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>https://www.eclipse.org/legal/epl-v10.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<name>Tycho Versions Plugin</name>
+	<properties>
+		<tychoBootstrapVersion>1.0.0</tychoBootstrapVersion>
+		<project.scm.id>git.samsara-software.es</project.scm.id>
+
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.pdark</groupId>
+			<artifactId>decentxml</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-core</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-metadata-model</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.tycho</groupId>
+			<artifactId>tycho-testing-harness</artifactId>
+			<version>1.0.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tychoBootstrapVersion}</version>
+				<executions>
+					<execution>
+						<id>attach-source</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>		
+			<plugin>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-component-metadata</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.5.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<configuration>
+					<goals>clean install deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>copy licenses</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${env.SAMSARASOFTWARE_WORKSPACE_DIR}/net.samsarasoftware/src/license/</directory>
+									<include>THIRD-PARTY.properties</include>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+							<outputDirectory>src/license</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+		<extensions>
+			<!-- Enabling the use of SSH -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.12</version>
+			</extension>
+		</extensions>
+	</build>
+	<scm>
+		<developerConnection>scm:git:ssh://git.samsara-software.es:50050/opt/git/net.samsarasoftware.git</developerConnection>
+		<tag>net.samsarasoftware-0.1.0</tag>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>maven3.samsara-software.es</id>
+			<url>scpexe://maven3.samsara-software.es:50050/var/www/vhosts/samsara-software.es/maven3.samsara-software.es/repository</url>
+		</repository>
+	</distributionManagement>
+</project>

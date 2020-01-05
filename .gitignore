@@ -1,0 +1,6 @@
+/target/
+/.flattened-pom.xml
+/pom.xml.releaseBackup
+/.flattened-pom.xml.releaseBackup
+/log.log
+/.settings/
