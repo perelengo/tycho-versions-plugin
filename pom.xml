@@ -3,11 +3,11 @@
 	This program and the accompanying materials - are made available under the 
 	terms of the Eclipse Public License v1.0 - which accompanies this distribution, 
 	and is available at - http://www.eclipse.org/legal/epl-v10.html - - Contributors: 
-	- Sonatype Inc. - initial API and implementation - 
-	- Pere Joseph Rodriguez - Modification to synchronize MANIFEST version from pom.xml
--->
+	- Sonatype Inc. - initial API and implementation - - Pere Joseph Rodriguez 
+	- Modification to synchronize MANIFEST version from pom.xml -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -86,7 +86,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>		
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.plexus</groupId>
 				<artifactId>plexus-component-metadata</artifactId>
@@ -125,7 +125,7 @@
 						<configuration>
 							<resources>
 								<resource>
-									<directory>${env.SAMSARASOFTWARE_WORKSPACE_DIR}/net.samsarasoftware/src/license/</directory>
+									<directory>${basedir}/../net.samsarasoftware/src/license/</directory>
 									<include>THIRD-PARTY.properties</include>
 									<filtering>true</filtering>
 								</resource>
@@ -135,7 +135,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 		<extensions>
 			<!-- Enabling the use of SSH -->
@@ -147,13 +147,12 @@
 		</extensions>
 	</build>
 	<scm>
-		<developerConnection>scm:git:ssh://git.samsara-software.es:50050/opt/git/net.samsarasoftware.git</developerConnection>
-		<tag>net.samsarasoftware-0.1.0</tag>
+		<developerConnection>scm:git:git://github.com/perelengo/tycho-versions-plugin.git</developerConnection>
 	</scm>
 	<distributionManagement>
 		<repository>
 			<id>maven3.samsara-software.es</id>
-			<url>scpexe://maven3.samsara-software.es:50050/var/www/vhosts/samsara-software.es/maven3.samsara-software.es/repository</url>
+			<url>scpexe://maven3.samsara-software.es:22/home/samsara-software/domains/maven3.samsara-software.es/repository</url>
 		</repository>
 	</distributionManagement>
 </project>
